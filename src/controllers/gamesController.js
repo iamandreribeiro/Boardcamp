@@ -5,7 +5,7 @@ export async function postGame(req, res) {
 
   try {
     await connectionDB.query(
-      "INSERT INTO games (name, image, stockTotal, categoryId, pricePerDay) VALUES ($1, $2, $3, $4, $5);",
+      `INSERT INTO games (name, image, "stockTotal", "categoryId", "pricePerDay") VALUES ($1, $2, $3, $4, $5);`,
       [name, image, stockTotal, categoryId, pricePerDay]
     );
 
@@ -17,7 +17,7 @@ export async function postGame(req, res) {
 
 export async function getAllGames(req, res) {
   try {
-    const { rows } = await connectionDB.query("SELECT * FROM games;");
+    const { rows } = await connectionDB.query(`SELECT * FROM games;`);
     return res.send(rows);
   } catch (error) {
     return res.status(500).send(error.message);

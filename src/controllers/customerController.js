@@ -5,7 +5,7 @@ export async function postCustomer(req, res) {
 
   try {
     await connectionDB.query(
-      "INSERT INTO customers (name, phone, cpf, birthday) VALUES ($1, $2, $3, $4);",
+      `INSERT INTO customers (name, phone, cpf, birthday) VALUES ($1, $2, $3, $4);`,
       [name, phone, cpf, birthday]
     );
 
@@ -17,7 +17,7 @@ export async function postCustomer(req, res) {
 
 export async function getAllCustomers(req, res) {
   try {
-    const { rows } = await connectionDB.query("SELECT * FROM customers;");
+    const { rows } = await connectionDB.query(`SELECT * FROM customers;`);
     return res.send(rows);
   } catch (error) {
     return res.status(500).send(error.message);
@@ -28,12 +28,12 @@ export async function getCustomerById(req, res) {
   const { id } = req.params;
   try {
     const { rows } = await connectionDB.query(
-      "SELECT * FROM customers WHERE id=$1;",
+      `SELECT * FROM customers WHERE id=$1;`,
       [id]
     );
 
     if (rows.length === 0) {
-      return res.status(404).send("Não existe nenhuma cliente com este ID");
+      return res.status(404).send("Não existe nenhum cliente com este ID");
     }
     return res.send(rows);
   } catch (error) {
@@ -43,11 +43,11 @@ export async function getCustomerById(req, res) {
 
 export async function updateCustomerById(req, res) {
   const { name, phone, cpf, birthday } = req.body;
-  const {id} = req.params;
+  const { id } = req.params;
 
   try {
     await connectionDB.query(
-      "UPDATE customers SET name=$1, phone=$2, cpf=$3, birthday=$4 WHERE id=$5;",
+      `UPDATE customers SET name=$1, phone=$2, cpf=$3, birthday=$4 WHERE id=$5;`,
       [name, phone, cpf, birthday, id]
     );
 
