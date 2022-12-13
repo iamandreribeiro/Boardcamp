@@ -9,17 +9,17 @@ export async function postGame(req, res) {
       [name, image, stockTotal, categoryId, pricePerDay]
     );
 
-    res.sendStatus(201);
+    return res.sendStatus(201);
   } catch (error) {
-    res.status(500).send(error.message);
+    return res.status(500).send(error.message);
   }
 }
 
 export async function getAllGames(req, res) {
   try {
     const { rows } = await connectionDB.query("SELECT * FROM games;");
-    res.send(rows);
+    return res.send(rows);
   } catch (error) {
-    res.status(500).send(error.message);
+    return res.status(500).send(error.message);
   }
 }

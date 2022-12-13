@@ -9,18 +9,18 @@ export async function postCustomer(req, res) {
       [name, phone, cpf, birthday]
     );
 
-    res.sendStatus(201);
+    return res.sendStatus(201);
   } catch (error) {
-    res.status(500).send(error.message);
+    return res.status(500).send(error.message);
   }
 }
 
 export async function getAllCustomers(req, res) {
   try {
     const { rows } = await connectionDB.query("SELECT * FROM customers;");
-    res.send(rows);
+    return res.send(rows);
   } catch (error) {
-    res.status(500).send(error.message);
+    return res.status(500).send(error.message);
   }
 }
 
@@ -51,8 +51,8 @@ export async function updateCustomerById(req, res) {
       [name, phone, cpf, birthday, id]
     );
 
-    res.sendStatus(201);
+    return res.sendStatus(201);
   } catch (error) {
-    res.status(500).send(error.message);
+    return res.status(500).send(error.message);
   }
 }
