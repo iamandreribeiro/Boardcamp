@@ -5,7 +5,7 @@ import {
   getAllRentals,
   getRentalById,
   deleteRental,
-} from "../controllers/rentalsController";
+} from "../controllers/rentalsController.js";
 
 const router = Router();
 
